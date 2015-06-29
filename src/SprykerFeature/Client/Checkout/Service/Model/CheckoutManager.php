@@ -1,6 +1,6 @@
 <?php
 
-namespace SprykerFeature\Client\Checkout\Model;
+namespace SprykerFeature\Client\Checkout\Service\Model;
 
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerFeature\Shared\Library\Communication\Response;
@@ -22,10 +22,10 @@ class CheckoutManager implements CheckoutManagerInterface
     }
 
     /**
-     * @param Order $order
+     * @param OrderTransfer $order
      * @return Response
      */
-    public function saveOrder(Order $order)
+    public function saveOrder(OrderTransfer $order)
     {
         $this->zedClient->call('checkout/gateway/save-order', $order, 60);
 
@@ -33,10 +33,11 @@ class CheckoutManager implements CheckoutManagerInterface
     }
 
     /**
-     * @param Order $order
-     * @return Order
+     * @param OrderTransfer $order
+     *
+     * @return OrderTransfer
      */
-    public function clearReferences(Order $order)
+    public function clearReferences(OrderTransfer $order)
     {
         $order->setIdSalesOrder(null);
         $order->setIncrementId(null);

@@ -1,9 +1,9 @@
 <?php
 
-namespace SprykerFeature\Client\Checkout;
+namespace SprykerFeature\Client\Checkout\Service;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use SprykerEngine\Client\Kernel\AbstractClient;
+use SprykerEngine\Client\Kernel\Service\AbstractClient;
 
 /**
  * @method CheckoutDependencyContainer getDependencyContainer()

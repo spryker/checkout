@@ -1,10 +1,10 @@
 <?php
 
-namespace SprykerFeature\Client\Checkout;
+namespace SprykerFeature\Client\Checkout\Service;
 
 use Generated\Client\Ide\FactoryAutoCompletion\Checkout;
-use SprykerEngine\Client\Kernel\AbstractDependencyContainer;
-use SprykerFeature\Client\Checkout\Model\CheckoutManager;
+use SprykerEngine\Client\Kernel\Service\AbstractDependencyContainer;
+use SprykerFeature\Client\Checkout\Service\Model\CheckoutManager;
 
 class CheckoutDependencyContainer extends AbstractDependencyContainer
 {
