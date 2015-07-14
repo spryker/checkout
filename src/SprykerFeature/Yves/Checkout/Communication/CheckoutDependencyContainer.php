@@ -1,6 +1,10 @@
 <?php
 
-namespace SprykerFeature\Yves\Checkout;
+/**
+ * (c) Spryker Systems GmbH copyright protected
+ */
+
+namespace SprykerFeature\Yves\Checkout\Communication;
 
 use SprykerEngine\Yves\Kernel\AbstractDependencyContainer;
 
