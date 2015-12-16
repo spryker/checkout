@@ -11,7 +11,7 @@ use Spryker\Client\Checkout\Zed\CheckoutStub;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\Checkout\Zed\CheckoutStubInterface;
 
-class CheckoutDependencyContainer extends AbstractFactory
+class CheckoutFactory extends AbstractFactory
 {
 
     /**
