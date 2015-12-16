@@ -11,7 +11,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use Spryker\Zed\Checkout\Business\Workflow\CheckoutWorkflowInterface;
 use Spryker\Zed\Checkout\CheckoutDependencyProvider;
 
-class CheckoutDependencyContainer extends AbstractBusinessFactory
+class CheckoutBusinessFactory extends AbstractBusinessFactory
 {
 
     /**
