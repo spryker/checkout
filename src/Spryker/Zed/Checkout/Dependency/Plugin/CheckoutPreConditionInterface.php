@@ -13,9 +13,9 @@ interface CheckoutPreConditionInterface
 {
 
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @param CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      */
-    public function checkCondition(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
+    public function checkCondition(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer);
 
 }
