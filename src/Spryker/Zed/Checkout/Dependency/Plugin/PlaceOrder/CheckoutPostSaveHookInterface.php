@@ -5,19 +5,16 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\Checkout\Dependency\Plugin;
+namespace Spryker\Zed\Checkout\Dependency\Plugin\PlaceOrder;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
-/**
- * @deprecated Use \Spryker\Zed\Checkout\Dependency\Plugin\PlaceOrder\CheckoutSaveOrderInterface instead
- * Will be removed with the next major
- */
-interface CheckoutSaveOrderInterface
+interface CheckoutPostSaveHookInterface
 {
     /**
-     * This plugin retrieves (its) data from the quote object and saves it to the database.
+     * Specification:
+     * - This plugin is called after the order is placed.
      *
      * @api
      *
@@ -26,5 +23,5 @@ interface CheckoutSaveOrderInterface
      *
      * @return void
      */
-    public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
+    public function executeHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
 }
