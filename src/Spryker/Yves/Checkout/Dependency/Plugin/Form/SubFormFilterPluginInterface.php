@@ -13,6 +13,9 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection;
 interface SubFormFilterPluginInterface
 {
     /**
+     * Specification:
+     * - Filters invalid sub-forms for checkout
+     *
      * @api
      *
      * @param \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection $formPluginCollection
