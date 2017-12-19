@@ -7,22 +7,22 @@
 
 namespace Spryker\Zed\Checkout\Dependency\Plugin;
 
-use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 
-interface CheckoutPostSaveHookInterface
+interface CheckoutDoSaveOrderInterface
 {
     /**
      * Specification:
-     * - This plugin is called after the order is placed.
-     * - Set the success flag to false, if redirect should be headed to an error page afterwords
+     * - Retrieves (its) data from the quote object and saves it to the database.
+     * - These plugins are already enveloped into a transaction.
      *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
      *
      * @return void
      */
-    public function executeHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
+    public function saveOrder(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer);
 }
