@@ -5,19 +5,19 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Client\Checkout\PluginExecutor;
+namespace Spryker\Client\Checkout\Quote;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 
-class QuoteProceedCheckoutCheckPluginExecutor implements QuoteProceedCheckoutCheckPluginExecutorInterface
+class QuoteProceedCheckoutChecker implements QuoteProceedCheckoutCheckerInterface
 {
     /**
-     * @var \Spryker\Client\Checkout\Plugin\QuoteProceedCheckoutCheckPluginInterface[]
+     * @var \Spryker\Client\CheckoutExtension\Dependency\Plugin\QuoteProceedCheckoutCheckPluginInterface[]
      */
     protected $quoteProccedCheckoutCheckPlugins;
 
     /**
-     * @param \Spryker\Client\Checkout\Plugin\QuoteProceedCheckoutCheckPluginInterface[] $quoteProccedCheckoutCheckPlugins
+     * @param \Spryker\Client\CheckoutExtension\Dependency\Plugin\QuoteProceedCheckoutCheckPluginInterface[] $quoteProccedCheckoutCheckPlugins
      */
     public function __construct(array $quoteProccedCheckoutCheckPlugins)
     {
@@ -29,14 +29,10 @@ class QuoteProceedCheckoutCheckPluginExecutor implements QuoteProceedCheckoutChe
      *
      * @return bool
      */
-    public function execute(QuoteTransfer $quoteTransfer): bool
+    public function isQuoteApplicableForCheckout(QuoteTransfer $quoteTransfer): bool
     {
-        if (empty($this->quoteProccedCheckoutCheckPlugins)) {
-            return true;
-        }
-
-        foreach ($this->quoteProccedCheckoutCheckPlugins as $plugin) {
-            if (!$plugin->can($quoteTransfer)) {
+        foreach ($this->quoteProccedCheckoutCheckPlugins as $quoteProccedCheckoutCheckPlugin) {
+            if (!$quoteProccedCheckoutCheckPlugin->can($quoteTransfer)) {
                 return false;
             }
         }
