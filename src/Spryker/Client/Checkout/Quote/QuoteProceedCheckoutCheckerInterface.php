@@ -5,32 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Client\Checkout;
+namespace Spryker\Client\Checkout\Quote;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\QuoteValidationResponseTransfer;
 
-interface CheckoutClientInterface
+interface QuoteProceedCheckoutCheckerInterface
 {
     /**
-     * Specification:
-     * - Places the order.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    public function placeOrder(QuoteTransfer $quoteTransfer);
-
-    /**
-     * Specification:
-     * - Validates quote using `CheckoutPreCheckPluginInterface` plugins.
-     * - Considers quote valid for checkout if no plugin returns with `isSuccessful=false`.
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteValidationResponseTransfer
