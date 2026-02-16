@@ -30,6 +30,7 @@ class CheckoutToQuoteFacadeAdapter implements CheckoutToQuoteFacadeInterface
     public function acquireExclusiveLockForQuote(int $idQuote): bool
     {
         /* Exists for backwards compatibility because `spryker/quote`:"^1.0.0" does not have `acquireExclusiveLockForQuote` but the version is supported. */
+        /** @phpstan-ignore function.alreadyNarrowedType */
         if (method_exists($this->quoteFacade, 'acquireExclusiveLockForQuote') === false) {
             return true;
         }
