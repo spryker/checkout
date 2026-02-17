@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace SprykerTest\Shared\Checkout;
+namespace SprykerTest\Shared;
 
 use Codeception\Actor;
 
