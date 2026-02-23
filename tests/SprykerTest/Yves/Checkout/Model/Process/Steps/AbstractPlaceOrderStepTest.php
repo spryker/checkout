@@ -14,6 +14,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Spryker\Client\Checkout\CheckoutClientInterface;
 use Spryker\Yves\Checkout\Process\Steps\AbstractPlaceOrderStep;
+use SprykerTest\Yves\Checkout\TestableAbstractPlaceOrderStep;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -216,7 +217,11 @@ class AbstractPlaceOrderStepTest extends Unit
         $errorCodeToEscapeRouteMatching = [
             static::ERROR_CODE_123 => static::ESCAPE_ROUTE_123,
         ];
-        $abstractPlaceOrderStepMock = $this->getMockForAbstractClass(AbstractPlaceOrderStep::class, [$checkoutClient, static::STEP_ROUTE, static::ESCAPE_ROUTE, $errorCodeToEscapeRouteMatching]);
+        // Create partial mock that only overrides setCheckoutErrorMessages so execute() uses real implementation
+        $abstractPlaceOrderStepMock = $this->getMockBuilder(TestableAbstractPlaceOrderStep::class)
+            ->setConstructorArgs([$checkoutClient, static::STEP_ROUTE, static::ESCAPE_ROUTE, $errorCodeToEscapeRouteMatching])
+            ->onlyMethods(['setCheckoutErrorMessages'])
+            ->getMock();
 
         return $abstractPlaceOrderStepMock;
     }
