@@ -68,11 +68,6 @@ class CheckoutWorkflow implements CheckoutWorkflowInterface
         return $checkoutResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
     public function isPlaceableOrder(QuoteTransfer $quoteTransfer): CheckoutResponseTransfer
     {
         $checkoutResponseTransfer = $this->createCheckoutResponseTransfer();
@@ -261,11 +256,6 @@ class CheckoutWorkflow implements CheckoutWorkflowInterface
         return $preSavePlugin->preSave($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function shouldSkipStateMachineRun(QuoteTransfer $quoteTransfer): bool
     {
         return $quoteTransfer->getShouldSkipStateMachineRun() === true;

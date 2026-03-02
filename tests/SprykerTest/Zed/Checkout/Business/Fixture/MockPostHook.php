@@ -18,20 +18,11 @@ class MockPostHook implements CheckoutPostSaveHookInterface
      */
     protected $checkoutResponse;
 
-    /**
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
-     */
     public function __construct(CheckoutResponseTransfer $checkoutResponse)
     {
         $this->checkoutResponse = $checkoutResponse;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
-     *
-     * @return void
-     */
     public function executeHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer): void
     {
         $checkoutResponseTransfer->fromArray($this->checkoutResponse->toArray(true), true);

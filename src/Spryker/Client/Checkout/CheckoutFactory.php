@@ -22,9 +22,6 @@ class CheckoutFactory extends AbstractFactory
         return new CheckoutStub($this->getProvidedDependency(CheckoutDependencyProvider::SERVICE_ZED));
     }
 
-    /**
-     * @return \Spryker\Client\Checkout\Quote\QuoteProceedCheckoutCheckerInterface
-     */
     public function createQuoteProceedCheckoutChecker(): QuoteProceedCheckoutCheckerInterface
     {
         return new QuoteProceedCheckoutChecker($this->getCheckoutPreCheckPlugins());

@@ -9,10 +9,5 @@ namespace Spryker\Zed\Checkout\Dependency\Facade;
 
 interface CheckoutToQuoteFacadeInterface
 {
-    /**
-     * @param int $idQuote
-     *
-     * @return bool
-     */
     public function acquireExclusiveLockForQuote(int $idQuote): bool;
 }

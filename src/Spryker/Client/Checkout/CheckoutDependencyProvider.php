@@ -38,11 +38,6 @@ class CheckoutDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addCheckoutPreCheckPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_CHECKOUT_PRE_CHECK, function () {

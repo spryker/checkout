@@ -33,9 +33,6 @@ class StepFactoryTest extends Unit
      */
     public const METHOD_HANDLER = 'method handler';
 
-    /**
-     * @return void
-     */
     public function testCreatePaymentMethodSubForms(): void
     {
         $container = new Container();
@@ -47,9 +44,6 @@ class StepFactoryTest extends Unit
         $this->assertSame(static::METHOD_HANDLER, $stepFactory->createPaymentMethodHandler());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateStepEngine(): void
     {
         $stepFactory = new StepFactory();

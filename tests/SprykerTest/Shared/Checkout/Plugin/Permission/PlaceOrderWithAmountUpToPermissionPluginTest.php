@@ -40,9 +40,6 @@ class PlaceOrderWithAmountUpToPermissionPluginTest extends Unit
      */
     protected const ZERO_CENT_AMOUNT = 0;
 
-    /**
-     * @return void
-     */
     public function testCanWithCentAmountLessThanConfigurationReturnsTrue(): void
     {
         // Arrange
@@ -55,9 +52,6 @@ class PlaceOrderWithAmountUpToPermissionPluginTest extends Unit
         $this->assertTrue($isAllowed);
     }
 
-    /**
-     * @return void
-     */
     public function testCanWithCentAmountMoreThanConfigurationReturnsFalse(): void
     {
         // Arrange
@@ -70,9 +64,6 @@ class PlaceOrderWithAmountUpToPermissionPluginTest extends Unit
         $this->assertFalse($isAllowed);
     }
 
-    /**
-     * @return void
-     */
     public function testCanWithZeroCentAmountReturnsTrue(): void
     {
         // Arrange
@@ -85,9 +76,6 @@ class PlaceOrderWithAmountUpToPermissionPluginTest extends Unit
         $this->assertTrue($isAllowed);
     }
 
-    /**
-     * @return void
-     */
     public function testCanWithCentAmountNotProvidedReturnsFalse(): void
     {
         // Arrange
@@ -100,9 +88,6 @@ class PlaceOrderWithAmountUpToPermissionPluginTest extends Unit
         $this->assertFalse($isAllowed);
     }
 
-    /**
-     * @return void
-     */
     public function testCanWithConfigWithoutCentAmountSetReturnsTrue(): void
     {
         // Arrange

@@ -61,9 +61,6 @@ class AbstractPlaceOrderStepTest extends Unit
      */
     public const EXTERNAL_REDIRECT_URL = 'externalRedirectUrl';
 
-    /**
-     * @return void
-     */
     public function testRequireInputReturnFalse(): void
     {
         $checkoutClientMock = $this->getCheckoutClientMock();
@@ -72,9 +69,6 @@ class AbstractPlaceOrderStepTest extends Unit
         $this->assertFalse($abstractPlaceOrderStepMock->requireInput(new QuoteTransfer()));
     }
 
-    /**
-     * @return void
-     */
     public function testExecuteShouldSetExternalRedirectUrlIfResponseContainsOne(): void
     {
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
@@ -89,9 +83,6 @@ class AbstractPlaceOrderStepTest extends Unit
         $this->assertSame(static::EXTERNAL_REDIRECT_URL, $abstractPlaceOrderStepMock->getExternalRedirectUrl());
     }
 
-    /**
-     * @return void
-     */
     public function testExecuteShouldSetOrderReferenceIfResponseContainsOne(): void
     {
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
@@ -108,9 +99,6 @@ class AbstractPlaceOrderStepTest extends Unit
         $this->assertSame(static::ORDER_REFERENCE, $quoteTransfer->getOrderReference());
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionReturnTrueWhenOrderReferenceGivenAndResponseIsSuccessful(): void
     {
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
@@ -128,9 +116,6 @@ class AbstractPlaceOrderStepTest extends Unit
         $this->assertTrue($abstractPlaceOrderStepMock->postCondition($quoteTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionReturnFalseWhenNoOrderReferenceGiven(): void
     {
         $abstractPlaceOrderStepMock = $this->getAbstractPlaceOrderStep(
@@ -140,9 +125,6 @@ class AbstractPlaceOrderStepTest extends Unit
         $this->assertFalse($abstractPlaceOrderStepMock->postCondition(new QuoteTransfer()));
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionReturnFalseWhenOrderReferenceGivenAndResponseIsNotSuccessful(): void
     {
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
@@ -160,9 +142,6 @@ class AbstractPlaceOrderStepTest extends Unit
         $this->assertFalse($abstractPlaceOrderStepMock->postCondition($quoteTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionDoesNotChangeEscapeRouteIfResponseFalseAndNoErrorCodeMatches(): void
     {
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
@@ -182,9 +161,6 @@ class AbstractPlaceOrderStepTest extends Unit
         $this->assertSame(static::ESCAPE_ROUTE, $abstractPlaceOrderStepMock->getEscapeRoute());
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionChangeErrorRouteIfResponseFalseAndErrorCodeMatches(): void
     {
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
@@ -234,9 +210,6 @@ class AbstractPlaceOrderStepTest extends Unit
         return $this->getMockBuilder(CheckoutClientInterface::class)->getMock();
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     protected function getRequest(): Request
     {
         return Request::create('foo');

@@ -75,9 +75,6 @@ class CheckoutFacadeTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -95,9 +92,6 @@ class CheckoutFacadeTest extends Unit
         ]);
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutSuccessfully(): void
     {
         // Arrange
@@ -126,9 +120,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertTrue($result->getIsSuccess());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutSuccessfullyWithItemLevelShippingAddresses(): void
     {
         // Arrange
@@ -157,9 +148,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertTrue($result->getIsSuccess());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutResponseContainsErrorIfCustomerAlreadyRegistered(): void
     {
         // Arrange
@@ -188,9 +176,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertSame(CheckoutConfig::ERROR_CODE_CUSTOMER_ALREADY_REGISTERED, $result->getErrors()[0]->getErrorCode());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutResponseContainsErrorIfCustomerAlreadyRegisteredWithItemLevelShippingAddress(): void
     {
         // Arrange
@@ -218,9 +203,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertSame(CheckoutConfig::ERROR_CODE_CUSTOMER_ALREADY_REGISTERED, $result->getErrors()[0]->getErrorCode());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutCreatesOrderItemsWithItemLevelShippingAddresses(): void
     {
         // Arrange
@@ -257,9 +239,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertArrayHasKey($productTransfer2->getSku(), $orderItemsSkuList);
     }
 
-    /**
-     * @return void
-     */
     public function testRegistrationIsTriggeredOnNewNonGuestCustomerWithItemLevelShippingAddresses(): void
     {
         // Arrange
@@ -276,9 +255,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertSame(1, $customerQuery->count());
     }
 
-    /**
-     * @return void
-     */
     public function testRegistrationDoesNotCreateACustomerIfGuestWithItemLevelShippingAddresses(): void
     {
         // Arrange
@@ -296,9 +272,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertSame(0, $customerQuery->count());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutResponseContainsErrorIfStockNotSufficient(): void
     {
         // Arrange
@@ -318,9 +291,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertSame(CheckoutConfig::ERROR_CODE_PRODUCT_UNAVAILABLE, $result->getErrors()[0]->getErrorCode());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutResponseContainsErrorIfOutOfStock(): void
     {
         // Arrange
@@ -340,9 +310,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertSame(CheckoutConfig::ERROR_CODE_PRODUCT_UNAVAILABLE, $result->getErrors()[0]->getErrorCode());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutResponseContainsErrorIfStockNotSufficientWithItemLevelShippingAddresses(): void
     {
         // Arrange
@@ -366,9 +333,6 @@ class CheckoutFacadeTest extends Unit
         $this->assertSame(CheckoutConfig::ERROR_CODE_PRODUCT_UNAVAILABLE, $result->getErrors()[0]->getErrorCode());
     }
 
-    /**
-     * @return void
-     */
     public function testCheckoutTriggersStateMachineWithItemLevelShippingAddresses(): void
     {
         // Arrange
@@ -420,9 +384,6 @@ class CheckoutFacadeTest extends Unit
         $this->tester->getFacade()->placeOrder($quoteTransfer);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function getBaseQuoteTransfer(): QuoteTransfer
     {
         // Arrange
@@ -503,9 +464,6 @@ class CheckoutFacadeTest extends Unit
         return $quoteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function getBaseQuoteTransferWithItemLevelShippingAddresses(): QuoteTransfer
     {
         // Arrange
@@ -567,9 +525,6 @@ class CheckoutFacadeTest extends Unit
         return $quoteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ShipmentTransfer
-     */
     protected function createShipmentTransfer(): ShipmentTransfer
     {
         $shippingAddress = (new AddressBuilder([
@@ -586,12 +541,6 @@ class CheckoutFacadeTest extends Unit
         return $shipment;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     * @param int $quantity
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
-     */
     protected function createItemTransfer(ProductConcreteTransfer $productConcreteTransfer, int $quantity): ItemTransfer
     {
         return (new ItemBuilder())
@@ -606,9 +555,6 @@ class CheckoutFacadeTest extends Unit
             ->build();
     }
 
-    /**
-     * @return \Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderSaverPlugin
-     */
     protected function createOrderSaverPlugin(): OrderSaverPlugin
     {
         $orderSaverPlugin = new OrderSaverPlugin();
@@ -617,9 +563,6 @@ class CheckoutFacadeTest extends Unit
         return $orderSaverPlugin;
     }
 
-    /**
-     * @return \Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderTotalsSaverPlugin
-     */
     protected function createOrderTotalsSaverPlugin(): OrderTotalsSaverPlugin
     {
         $orderTotalsSaverPlugin = new OrderTotalsSaverPlugin();
@@ -628,9 +571,6 @@ class CheckoutFacadeTest extends Unit
         return $orderTotalsSaverPlugin;
     }
 
-    /**
-     * @return \Spryker\Zed\Sales\Communication\Plugin\Checkout\OrderItemsSaverPlugin
-     */
     protected function createOrderItemsSaverPlugin(): OrderItemsSaverPlugin
     {
         $orderItemsSaverPlugin = new OrderItemsSaverPlugin();
@@ -639,9 +579,6 @@ class CheckoutFacadeTest extends Unit
         return $orderItemsSaverPlugin;
     }
 
-    /**
-     * @return \Spryker\Zed\Customer\Communication\Plugin\Checkout\CustomerOrderSavePlugin
-     */
     protected function createCustomerOrderSavePlugin(): CustomerOrderSavePlugin
     {
         $customerOrderSavePlugin = new CustomerOrderSavePlugin();
@@ -650,11 +587,6 @@ class CheckoutFacadeTest extends Unit
         return $customerOrderSavePlugin;
     }
 
-    /**
-     * @param string $testStateMachineProcessName
-     *
-     * @return \Spryker\Zed\Sales\Business\SalesFacade
-     */
     protected function createSalesFacadeMock(string $testStateMachineProcessName = 'Test01'): SalesFacade
     {
         $this->tester->configureTestStateMachine([$testStateMachineProcessName]);
@@ -671,20 +603,11 @@ class CheckoutFacadeTest extends Unit
         return $salesFacade;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     protected function createAddressTransfer(): AddressTransfer
     {
         return (new AddressBuilder())->build();
     }
 
-    /**
-     * @param array $seed
-     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customer
-     *
-     * @return \Generated\Shared\DataBuilder\ItemBuilder
-     */
     protected function createItemWithShipment(array $seed, ?CustomerTransfer $customer = null): ItemBuilder
     {
         $address = (new AddressBuilder([AddressTransfer::EMAIL => $customer->getEmail()]));
@@ -956,9 +879,6 @@ class CheckoutFacadeTest extends Unit
         ];
     }
 
-    /**
-     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPreConditionPluginInterface
-     */
     protected function getCheckoutPreConditionPluginMock(): CheckoutPreConditionPluginInterface
     {
         $checkoutPreConditionPluginMock = $this
@@ -969,9 +889,6 @@ class CheckoutFacadeTest extends Unit
         return $checkoutPreConditionPluginMock;
     }
 
-    /**
-     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPreConditionPluginInterface
-     */
     protected function getNeverCalledCheckoutPreConditionPluginMock(): CheckoutPreConditionPluginInterface
     {
         $checkoutPreConditionPluginMock = $this
@@ -982,9 +899,6 @@ class CheckoutFacadeTest extends Unit
         return $checkoutPreConditionPluginMock;
     }
 
-    /**
-     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPreSavePluginInterface
-     */
     protected function getCheckoutPreSavePluginMock(): CheckoutPreSavePluginInterface
     {
         $checkoutPreSavePluginMock = $this
@@ -996,9 +910,6 @@ class CheckoutFacadeTest extends Unit
         return $checkoutPreSavePluginMock;
     }
 
-    /**
-     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPreSavePluginInterface
-     */
     protected function getNeverCalledCheckoutPreSavePluginMock(): CheckoutPreSavePluginInterface
     {
         $checkoutPreSavePluginMock = $this
@@ -1009,9 +920,6 @@ class CheckoutFacadeTest extends Unit
         return $checkoutPreSavePluginMock;
     }
 
-    /**
-     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutDoSaveOrderInterface
-     */
     protected function getCheckoutDoSaveOrderPluginMock(): CheckoutDoSaveOrderInterface
     {
         $checkoutDoSaveOrderPluginMock = $this
@@ -1022,9 +930,6 @@ class CheckoutFacadeTest extends Unit
         return $checkoutDoSaveOrderPluginMock;
     }
 
-    /**
-     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutDoSaveOrderInterface
-     */
     protected function getNeverCalledCheckoutDoSaveOrderPluginMock(): CheckoutDoSaveOrderInterface
     {
         $checkoutDoSaveOrderPluginMock = $this
@@ -1035,9 +940,6 @@ class CheckoutFacadeTest extends Unit
         return $checkoutDoSaveOrderPluginMock;
     }
 
-    /**
-     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPostSaveInterface
-     */
     protected function getCheckoutPostSavePluginMock(): CheckoutPostSaveInterface
     {
         $checkoutPostSavePluginMock = $this
@@ -1048,9 +950,6 @@ class CheckoutFacadeTest extends Unit
         return $checkoutPostSavePluginMock;
     }
 
-    /**
-     * @return \Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPostSaveInterface
-     */
     protected function getNeverCalledCheckoutPostSavePluginMock(): CheckoutPostSaveInterface
     {
         $checkoutPostSavePluginMock = $this

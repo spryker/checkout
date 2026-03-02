@@ -50,9 +50,6 @@ class CheckoutWorkflowTest extends Unit
      */
     protected CheckoutBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     public function testIsPlaceableOrderResponseIsSuccessful(): void
     {
         // Arrange
@@ -75,9 +72,6 @@ class CheckoutWorkflowTest extends Unit
         $this->assertTrue($checkoutResponseTransfer->getIsSuccess());
     }
 
-    /**
-     * @return void
-     */
     public function testIsPlaceableOrderResponseIsNotSuccessful(): void
     {
         // Arrange
@@ -107,9 +101,6 @@ class CheckoutWorkflowTest extends Unit
         $this->assertFalse($checkoutResponseTransfer->getIsSuccess());
     }
 
-    /**
-     * @return void
-     */
     public function testWorkflowCallsAllPreConditions(): void
     {
         $mock1 = $this->getMockBuilder(CheckoutPreConditionInterface::class)->getMock();
@@ -140,9 +131,6 @@ class CheckoutWorkflowTest extends Unit
         $checkoutWorkflow->placeOrder($quoteTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testPlaceOrderRetryAttempts(): void
     {
         $mock = $this->getMockBuilder(CheckoutDoSaveOrderInterface::class)->getMock();
@@ -169,9 +157,6 @@ class CheckoutWorkflowTest extends Unit
         $checkoutWorkflow->placeOrder($quoteTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testPlaceOrderReturnsUpdatedQuoteTransfer(): void
     {
         $mock = $this->getMockBuilder(CheckoutDoSaveOrderInterface::class)->getMock();
@@ -203,9 +188,6 @@ class CheckoutWorkflowTest extends Unit
         $this->assertSame($quoteTransfer->getItems()->getIterator()->current()->getIdSalesOrderItem(), $idSalesOrderItem);
     }
 
-    /**
-     * @return void
-     */
     public function testWorkflowCallsAllOrderSavers(): void
     {
         $mock1 = $this->getMockBuilder(CheckoutDoSaveOrderInterface::class)->getMock();
@@ -235,9 +217,6 @@ class CheckoutWorkflowTest extends Unit
         $checkoutWorkflow->placeOrder($quoteTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testWorkflowCallsAllDeprecatedOrderSavers(): void
     {
         $mock1 = $this->getMockBuilder(CheckoutDoSaveOrderInterface::class)->getMock();
@@ -274,9 +253,6 @@ class CheckoutWorkflowTest extends Unit
         $checkoutWorkflow->placeOrder($quoteTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testWorkflowCallsAllPostHooks(): void
     {
         $mock1 = $this->getMockBuilder(CheckoutPostSaveHookInterface::class)->getMock();
@@ -306,9 +282,6 @@ class CheckoutWorkflowTest extends Unit
         $checkoutWorkflow->placeOrder($quoteTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testWorkflowPassesResponseOn(): void
     {
         $checkoutResponse = $this->createBaseCheckoutResponse();
@@ -339,9 +312,6 @@ class CheckoutWorkflowTest extends Unit
         $checkoutWorkflow->placeOrder($quoteTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testPostHookResultIsReturned(): void
     {
         $checkoutResponse = $this->createBaseCheckoutResponse();
@@ -397,9 +367,6 @@ class CheckoutWorkflowTest extends Unit
         $checkoutWorkflow->placeOrder($quoteTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testPlaceOrderShouldNotTriggerOmsWhenShouldSkipStateMachineRunPropertyIsSetToQuote(): void
     {
         // Arrange
@@ -434,9 +401,6 @@ class CheckoutWorkflowTest extends Unit
         ];
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
     protected function createBaseCheckoutResponse(): CheckoutResponseTransfer
     {
         $checkoutResponseTransfer = new CheckoutResponseTransfer();
@@ -446,11 +410,6 @@ class CheckoutWorkflowTest extends Unit
         return $checkoutResponseTransfer;
     }
 
-    /**
-     * @param array $plugins
-     *
-     * @return \Spryker\Shared\Kernel\StrategyResolverInterface
-     */
     protected function createVanillaStrategyResolver(array $plugins): StrategyResolverInterface
     {
         return new StrategyResolver(
@@ -461,9 +420,6 @@ class CheckoutWorkflowTest extends Unit
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Checkout\Dependency\Facade\CheckoutToQuoteFacadeInterface
-     */
     protected function createQuoteFacadeMock(): CheckoutToQuoteFacadeInterface
     {
         return new CheckoutToQuoteFacadeAdapter(

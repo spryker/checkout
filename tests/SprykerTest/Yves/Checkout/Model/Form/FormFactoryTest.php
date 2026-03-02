@@ -30,9 +30,6 @@ class FormFactoryTest extends Unit
      */
     public const SUB_FORMS = 'forms';
 
-    /**
-     * @return void
-     */
     public function testCreatePaymentMethodSubForms(): void
     {
         $container = new Container();

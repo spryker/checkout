@@ -62,9 +62,6 @@ class PlaceOrderWithAmountUpToPermissionPlugin implements ExecutablePermissionPl
         ];
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return static::KEY;

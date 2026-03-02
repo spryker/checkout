@@ -105,9 +105,6 @@ class CheckoutBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(CheckoutDependencyProvider::FACADE_OMS);
     }
 
-    /**
-     * @return \Spryker\Zed\Checkout\Dependency\Facade\CheckoutToQuoteFacadeInterface
-     */
     public function getQuoteFacade(): CheckoutToQuoteFacadeInterface
     {
         return $this->getProvidedDependency(CheckoutDependencyProvider::FACADE_QUOTE);

@@ -25,11 +25,6 @@ class QuoteProceedCheckoutChecker implements QuoteProceedCheckoutCheckerInterfac
         $this->quoteProceedCheckoutCheckPlugins = $quoteProccedCheckoutCheckPlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteValidationResponseTransfer
-     */
     public function isQuoteApplicableForCheckout(QuoteTransfer $quoteTransfer): QuoteValidationResponseTransfer
     {
         foreach ($this->quoteProceedCheckoutCheckPlugins as $quoteProccedCheckoutCheckPlugin) {

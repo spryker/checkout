@@ -25,9 +25,6 @@ use Spryker\Yves\Checkout\Dependency\Client\CheckoutToQuoteInterface;
  */
 class DataContainerTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testGetShouldCallClientToGetQuoteTransferIfNotSet(): void
     {
         $quoteClientMock = $this->getQuoteClientMock();
@@ -38,9 +35,6 @@ class DataContainerTest extends Unit
         $this->assertInstanceOf(QuoteTransfer::class, $dataContainer->get());
     }
 
-    /**
-     * @return void
-     */
     public function testGetShouldNotCallClientToGetQuoteTransferIfSet(): void
     {
         $cartClientMock = $this->getQuoteClientMock();
@@ -52,9 +46,6 @@ class DataContainerTest extends Unit
         $dataContainer->get();
     }
 
-    /**
-     * @return void
-     */
     public function testSetShouldCallClientToStoreQuoteTransfer(): void
     {
         $cartClientMock = $this->getQuoteClientMock();

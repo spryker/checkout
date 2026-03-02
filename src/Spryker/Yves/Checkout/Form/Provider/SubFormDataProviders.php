@@ -19,9 +19,6 @@ class SubFormDataProviders implements StepEngineFormDataProviderInterface
      */
     protected $subFormPlugins;
 
-    /**
-     * @param \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection $subFormPlugins
-     */
     public function __construct(SubFormPluginCollection $subFormPlugins)
     {
         $this->subFormPlugins = $subFormPlugins;

@@ -19,10 +19,5 @@ interface CheckoutStubInterface
      */
     public function placeOrder(QuoteTransfer $quoteTransfer);
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
     public function isPlaceableOrder(QuoteTransfer $quoteTransfer): CheckoutResponseTransfer;
 }

@@ -22,11 +22,6 @@ class CheckoutToQuoteFacadeAdapter implements CheckoutToQuoteFacadeInterface
         $this->quoteFacade = $quoteFacade;
     }
 
-    /**
-     * @param int $idQuote
-     *
-     * @return bool
-     */
     public function acquireExclusiveLockForQuote(int $idQuote): bool
     {
         /* Exists for backwards compatibility because `spryker/quote`:"^1.0.0" does not have `acquireExclusiveLockForQuote` but the version is supported. */
