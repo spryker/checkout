@@ -133,7 +133,7 @@ class CheckoutWorkflow implements CheckoutWorkflowInterface
         while ($maxAttempts) {
             $maxAttempts--;
             try {
-                $quoteTransferToSave = clone $quoteTransfer;
+                $quoteTransferToSave = (new QuoteTransfer())->fromArray($quoteTransfer->modifiedToArray());
                 $idQuote = $quoteTransferToSave->getIdQuote();
 
                 $this->handleDatabaseTransaction(function () use ($quoteTransferToSave, $checkoutResponse, $idQuote) {
@@ -148,7 +148,7 @@ class CheckoutWorkflow implements CheckoutWorkflowInterface
 
                 break;
             } catch (Throwable $e) {
-                if ($maxAttempts <= 0) {
+                if ($maxAttempts <= 0 || !in_array(get_class($e), $this->checkoutConfig->getRetryableExceptions(), true)) {
                     throw $e;
                 }
             }
