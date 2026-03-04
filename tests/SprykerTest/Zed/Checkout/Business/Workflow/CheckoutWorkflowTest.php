@@ -8,6 +8,7 @@
 namespace SprykerTest\Zed\Checkout\Business\Workflow;
 
 use Codeception\Test\Unit;
+use DivisionByZeroError;
 use Exception;
 use Generated\Shared\DataBuilder\QuoteBuilder;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
@@ -135,8 +136,7 @@ class CheckoutWorkflowTest extends Unit
     {
         $mock = $this->getMockBuilder(CheckoutDoSaveOrderInterface::class)->getMock();
         $checkoutConfig = new CheckoutConfig();
-
-        $mock->expects($this->exactly($checkoutConfig->getSaveOrderTransactionMaxAttempts()))->method('saveOrder')->with(
+        $mock->expects($this->exactly(1))->method('saveOrder')->with(
             $this->isInstanceOf(QuoteTransfer::class),
             $this->isInstanceOf(SaveOrderTransfer::class),
         );
@@ -154,6 +154,36 @@ class CheckoutWorkflowTest extends Unit
 
         $quoteTransfer = new QuoteTransfer();
         $this->expectException(Exception::class);
+        $checkoutWorkflow->placeOrder($quoteTransfer);
+    }
+
+    public function testPlaceOrderRetryAttemptsWithConfiguredRetryableExceptions(): void
+    {
+        $mock = $this->getMockBuilder(CheckoutDoSaveOrderInterface::class)->getMock();
+        $checkoutConfigMock = $this->getMockBuilder(CheckoutConfig::class)
+            ->onlyMethods(['getRetryableExceptions'])
+            ->getMock();
+        $checkoutConfigMock->method('getRetryableExceptions')
+            ->willReturn([DivisionByZeroError::class]);
+
+        $mock->expects($this->exactly($checkoutConfigMock->getSaveOrderTransactionMaxAttempts()))->method('saveOrder')->with(
+            $this->isInstanceOf(QuoteTransfer::class),
+            $this->isInstanceOf(SaveOrderTransfer::class),
+        );
+        $mock->method('saveOrder')->willThrowException(new DivisionByZeroError());
+
+        $checkoutWorkflow = new CheckoutWorkflow(
+            new CheckoutToOmsFacadeBridge(new OmsFacade()),
+            $this->createVanillaStrategyResolver([]),
+            $this->createVanillaStrategyResolver([$mock]),
+            $this->createVanillaStrategyResolver([]),
+            $this->createVanillaStrategyResolver([]),
+            $checkoutConfigMock,
+            $this->createQuoteFacadeMock(),
+        );
+
+        $quoteTransfer = new QuoteTransfer();
+        $this->expectException(DivisionByZeroError::class);
         $checkoutWorkflow->placeOrder($quoteTransfer);
     }
 

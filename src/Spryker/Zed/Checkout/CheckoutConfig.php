@@ -43,4 +43,17 @@ class CheckoutConfig extends AbstractBundleConfig
     {
         return static::SAVE_ORDER_TRANSACTION_MAX_ATTEMPTS;
     }
+
+    /**
+     * Specification:
+     * - Returns an array of exception FQCN that are considered retryable when saving an order.
+     *
+     * @api
+     *
+     * @return list<string>
+     */
+    public function getRetryableExceptions(): array
+    {
+        return [];
+    }
 }
