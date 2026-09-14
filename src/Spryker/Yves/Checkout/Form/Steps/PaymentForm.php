@@ -105,6 +105,7 @@ class PaymentForm extends AbstractType
     protected function addPaymentMethodSubForms(FormBuilderInterface $builder, array $paymentMethodSubForms, array $options)
     {
         foreach ($paymentMethodSubForms as $paymentMethodSubForm) {
+            /** @var \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface&\Symfony\Component\Form\FormTypeInterface $paymentMethodSubForm */
             $builder->add(
                 $paymentMethodSubForm->getName(),
                 get_class($paymentMethodSubForm),
