@@ -7,6 +7,7 @@
 
 namespace Spryker\Zed\Checkout\Business\Workflow;
 
+use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
@@ -22,6 +23,8 @@ use Throwable;
 class CheckoutWorkflow implements CheckoutWorkflowInterface
 {
     use DatabaseTransactionHandlerTrait;
+
+    protected const string GLOSSARY_KEY_QUOTE_LOCKED = 'checkout.error.quote_locked';
 
     /**
      * @param \Spryker\Zed\Checkout\Dependency\Facade\CheckoutToOmsFacadeInterface $omsFacade
@@ -155,6 +158,10 @@ class CheckoutWorkflow implements CheckoutWorkflowInterface
     /**
      * Attempts to acquire an exclusive lock for a quote.
      *
+     * A failed lock is reported as its own error rather than as a bare unsuccessful response —
+     * otherwise the customer is told the order could not be placed with no indication that the cart
+     * is simply busy, and retrying is the one thing that would work.
+     *
      * @param int $idQuote
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
      *
@@ -166,7 +173,13 @@ class CheckoutWorkflow implements CheckoutWorkflowInterface
             return true;
         }
 
-        $checkoutResponse->setIsSuccess(false);
+        $checkoutResponse
+            ->setIsSuccess(false)
+            ->addError(
+                (new CheckoutErrorTransfer())
+                    ->setErrorCode(CheckoutConfig::ERROR_CODE_QUOTE_LOCKED)
+                    ->setMessage(static::GLOSSARY_KEY_QUOTE_LOCKED),
+            );
 
         return false;
     }

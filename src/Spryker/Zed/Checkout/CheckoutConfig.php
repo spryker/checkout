@@ -33,6 +33,13 @@ class CheckoutConfig extends AbstractBundleConfig
     public const ERROR_CODE_CART_AMOUNT_DIFFERENT = '4003';
 
     /**
+     * The cart is already being checked out by another request.
+     *
+     * @api
+     */
+    public const int ERROR_CODE_QUOTE_LOCKED = 4004;
+
+    /**
      * @var int
      */
     protected const SAVE_ORDER_TRANSACTION_MAX_ATTEMPTS = 5;
